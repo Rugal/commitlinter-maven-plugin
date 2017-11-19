@@ -1,0 +1,46 @@
+package ga.rugal.maven.plugin;
+
+import ga.rugal.maven.plugin.rule.CaseRule;
+import ga.rugal.maven.plugin.rule.LengthRule;
+import lombok.AllArgsConstructor;
+import org.apache.maven.plugin.logging.Log;
+
+/**
+ * To check rules against a matched string.
+ *
+ * @author Rugal Bernstein
+ */
+@AllArgsConstructor
+public class RuleChecker {
+
+  private final CaptureGroup captureGroup;
+
+  private final Log log;
+
+  /**
+   * Check a matched string with given rules.
+   *
+   * @param match
+   * @return
+   */
+  public int check(String match) {
+    int failed = 0;
+    this.log.info(String.format("Checking: %s", match));
+    if (!CaseRule.validate(match, this.captureGroup.getCaseFormat())) {
+      this.log.error(String.format("  Case format should be %s",
+                                   this.captureGroup.getCaseFormat().name()));
+      failed++;
+    }
+    if (!LengthRule.fitMax(match, this.captureGroup.getMax())) {
+      this.log.error(String.format("  Length should be no more than %d",
+                                   this.captureGroup.getMax()));
+      failed++;
+    }
+    if (!LengthRule.fitMin(match, this.captureGroup.getMin())) {
+      this.log.error(String.format("  Length should be no less than %d",
+                                   this.captureGroup.getMin()));
+      failed++;
+    }
+    return failed;
+  }
+}
