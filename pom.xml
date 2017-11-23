@@ -170,6 +170,16 @@
           </execution>
         </executions>
       </plugin>
+      <!-- Version Monitor -->
+      <plugin>
+        <groupId>com.versioneye</groupId>
+        <artifactId>versioneye-maven-plugin</artifactId>
+        <version>3.11.4</version>
+        <configuration>
+          <apiKey>bac728ad45c53ac8d553</apiKey>
+          <organisation>rugal_orga</organisation>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-plugin-plugin</artifactId>
