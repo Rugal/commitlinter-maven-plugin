@@ -20,24 +20,24 @@ public class RuleChecker {
   /**
    * Check a matched string with given rules.
    *
-   * @param match
-   * @return
+   * @param match The input string
+   * @return How many failed checks in this string
    */
   public int check(String match) {
     int failed = 0;
-    this.log.info(String.format("Checking: %s", match));
+    this.log.info(String.format("Linting: [%s]", match));
     if (!CaseRule.validate(match, this.captureGroup.getCaseFormat())) {
-      this.log.error(String.format("  Case format should be %s",
+      this.log.error(String.format("    Case format should be %s",
                                    this.captureGroup.getCaseFormat().name()));
       failed++;
     }
     if (!LengthRule.fitMax(match, this.captureGroup.getMax())) {
-      this.log.error(String.format("  Length should be no more than %d",
+      this.log.error(String.format("    Length should be no more than %d",
                                    this.captureGroup.getMax()));
       failed++;
     }
     if (!LengthRule.fitMin(match, this.captureGroup.getMin())) {
-      this.log.error(String.format("  Length should be no less than %d",
+      this.log.error(String.format("    Length should be no less than %d",
                                    this.captureGroup.getMin()));
       failed++;
     }

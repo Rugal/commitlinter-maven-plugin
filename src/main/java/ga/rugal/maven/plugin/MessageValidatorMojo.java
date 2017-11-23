@@ -44,7 +44,7 @@ public class MessageValidatorMojo extends AbstractMojo {
   private String testCommitMessage;
 
   @Parameter
-  private String matchPattern = ".*";
+  private String matchPattern = "(.*)";
 
   @Parameter
   private CaptureGroup[] captureGroups = new CaptureGroup[0];
@@ -88,7 +88,7 @@ public class MessageValidatorMojo extends AbstractMojo {
     Matcher matcher = pattern.matcher(capturedString);
 
     if (!matcher.find()) {
-      throw new MojoFailureException(String.format("No content found %s", capturedString));
+      throw new MojoFailureException(String.format("No content found [%s]", capturedString));
     }
     return matcher.group().trim();
   }
@@ -96,27 +96,27 @@ public class MessageValidatorMojo extends AbstractMojo {
   @Override
   public void execute() throws MojoExecutionException, MojoFailureException {
     if (this.skip) {
-      this.getLog().info("Skip Commit-linter");
+      this.getLog().info("Skip Commitlinter");
       return;
     }
     try {
       String commitMessage = this.getRecentCommitMessage();
       if (null != this.testCommitMessage) {
         commitMessage = this.testCommitMessage;
-        this.getLog().debug(String.format("Use test commit message %s", this.testCommitMessage));
+        this.getLog().debug(String.format("Use test commit message [%s]", this.testCommitMessage));
       }
       Pattern pattern = Pattern.compile(this.matchPattern);
       Matcher matcher = pattern.matcher(commitMessage);
 
       if (!matcher.find()) {
-        throw new MojoFailureException(String.format("No pattern matched by Regex: %s",
+        throw new MojoFailureException(String.format("No pattern matched by Regex: [%s]",
                                                      this.matchPattern));
       }
 
       int result = 0;
       for (int i = 1; i <= Math.min(this.captureGroups.length, matcher.groupCount()); i++) {
         String extractedContent = this.extractContent(matcher.group(i));
-        this.getLog().info(extractedContent);
+        this.getLog().debug(extractedContent);
         RuleChecker checker = new RuleChecker(this.captureGroups[i - 1], this.getLog());
         result += checker.check(extractedContent);
       }
