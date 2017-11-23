@@ -19,7 +19,7 @@
         <version>1.0-SNAPSHOT</version>
         <configuration>
           <matchPattern>(\([\w\s]*\))\s(\w*)</matchPattern>
-          <testCommitMessage>(This Is Not Upper Camel Case) this_Is_Not_Upper_Camel_Case_Too</testCommitMessage>
+          <testCommitMessage>(thisIsNotUpperCamelCase) this_Is_Not_Upper_Camel_Case_Too</testCommitMessage>
           <failOnError>true</failOnError>
           <captureGroups>
             <captureGroup>
