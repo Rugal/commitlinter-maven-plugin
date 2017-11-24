@@ -1,11 +1,122 @@
-## Build Status
+# Code Status
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/ga.rugal.maven/commitlinter-maven-plugin/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/ga.rugal.maven/commitlinter-maven-plugin)
+[![Javadocs](https://javadoc.io/badge/ga.rugal.maven/commitlinter-maven-plugin.svg)](https://javadoc.io/doc/ga.rugal.maven/commitlinter-maven-plugin)
 [![Build Status](https://travis-ci.org/Rugal/git-commit-message-linter.svg?branch=master)](https://travis-ci.org/Rugal/git-commit-message-linter)
-
-## Test Coverage
 [![codecov](https://codecov.io/gh/Rugal/git-commit-message-linter/branch/master/graph/badge.svg)](https://codecov.io/gh/Rugal/git-commit-message-linter)
-
-## Code Quality
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/126124bcd6ee4e2481c78d55cbe0fb55)](https://www.codacy.com/app/ryujinwrath/git-commit-message-linter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Rugal/git-commit-message-linter&amp;utm_campaign=Badge_Grade)
-
-## Dependency Management
 [![Dependency Status](https://www.versioneye.com/user/projects/5a172b690fb24f001cf0bd0e/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5a172b690fb24f001cf0bd0e)
+
+# Usage
+This plugin lints your git commit message according to the rules you defined.  
+It basically reads commit message from git repository, matches it with the Regex you provided, before linting each capture group according to your rules.  
+
+```xml
+<plugin>
+  <groupId>ga.rugal.maven</groupId>
+  <artifactId>commitlinter-maven-plugin</artifactId>
+  <version>THE-VERSION-YOU-LIKE</version>
+</plugin>
+```
+
+Then run command:
+```bash
+mvn commitlinter:validate
+```
+This will report nothing as we haven't configure any linting rules.
+
+## Show case
+[![asciicast](https://asciinema.org/a/fIZEcdFJRPchLj06JoIXHTfiG.png)](https://asciinema.org/a/fIZEcdFJRPchLj06JoIXHTfiG)
+
+
+# Parameters
+
+Parameter | Type | Description | Default
+---|---|---|---
+captureGroups| CaptureGroup[] | List of CaptureGroups | []
+captureGroup.caseFormat | enum | The case format we want to lint | NONE
+captureGroup.max | Integer | The maximum length of this capture group | Integer.MAX
+captureGroup.min | Integer | The minimum length of this capture group | 0
+failOnError|Boolean | Whether to fail maven build on linting error | false
+gitFolder|String|The git repository folder| .git
+head|String | The pointer of git | HEAD
+matchPattern |Regex|The regex to match commit message|(.*)
+skip|Boolean|Whether to skip linting| false
+testCommitMessage|String|The commit message to test with|""
+
+## caseFormat
+
+case | sample
+---|---
+UPPERCASE | THIS IS UPPER CASE/THIS_IS_UPPER_CASE_TOO
+LOWERCASE | this is lower case/this_is_lower_case_too
+UPPERCAMELCASE | ThisIsUpperCamelCase
+LOWERCAMELCASE | thisIsLowerCamelCase
+KEBABCASE | this-is-kebab-case
+SNAKECASE | this_is_snake_case
+SENTENCECASE | This is sentence case
+NONE | ANY_case-you Like
+
+# Simple Example
+Please always make sure to wrap the capture group with `()` so the Regex matcher can capture it.  
+
+## With Basic Configuration
+
+```xml
+<plugin>
+  <groupId>ga.rugal.maven</groupId>
+  <artifactId>commitlinter-maven-plugin</artifactId>
+  <version>THE-VERSION-YOU-LIKE</version>
+  <configuration>
+    <matchPattern>([\w\s]+-\d+:\s)(.*)</matchPattern>
+    <failOnError>true</failOnError>
+    <captureGroups>
+      <captureGroup>
+        <max>10</max>
+        <min>2</min>
+        <caseFormat>LOWERCASE</caseFormat>
+      </captureGroup>
+      <captureGroup>
+        <max>20</max>
+        <caseFormat>LOWERCASE</caseFormat>
+      </captureGroup>
+    </captureGroups>
+  </configuration>
+</plugin>
+```
+
+This configuration will match the git commit message with Regex, then lint them with the rules defined above.
+
+## Bind With Lifecycle
+
+This will bind `validate` goal in validate phase of Maven lifecycle.
+```xml
+<plugin>
+  <groupId>ga.rugal.maven</groupId>
+  <artifactId>commitlinter-maven-plugin</artifactId>
+  <version>THE-VERSION-YOU-LIKE</version>
+  <executions>
+    <execution>
+      <id>validate</id>
+      <phase>validate</phase>
+      <configuration>
+        <matchPattern>([\w\s]+-\d+:\s)(.*)</matchPattern>
+        <failOnError>true</failOnError>
+        <captureGroups>
+          <captureGroup>
+            <caseFormat>LOWERCASE</caseFormat>
+          </captureGroup>
+          <captureGroup>
+            <caseFormat>LOWERCASE</caseFormat>
+          </captureGroup>
+        </captureGroups>
+      </configuration>
+      <goals>
+        <goal>validate</goal>
+      </goals>
+    </execution>
+  </executions>
+</plugin>
+```
+
+# Credit
+* The creation of this plugin is inspired by [commitlint](https://github.com/marionebl/commitlint)
