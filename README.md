@@ -1,9 +1,10 @@
 # Code Status
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/ga.rugal.maven/commitlinter-maven-plugin/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/ga.rugal.maven/commitlinter-maven-plugin)
+[![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Javadocs](https://javadoc.io/badge/ga.rugal.maven/commitlinter-maven-plugin.svg)](https://javadoc.io/doc/ga.rugal.maven/commitlinter-maven-plugin)
-[![Build Status](https://travis-ci.org/Rugal/git-commit-message-linter.svg?branch=master)](https://travis-ci.org/Rugal/git-commit-message-linter)
+[![Build Status](https://travis-ci.org/Rugal/commitlinter-maven-plugin.svg?branch=master)](https://travis-ci.org/Rugal/commitlinter-maven-plugin)
 [![codecov](https://codecov.io/gh/Rugal/git-commit-message-linter/branch/master/graph/badge.svg)](https://codecov.io/gh/Rugal/git-commit-message-linter)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/126124bcd6ee4e2481c78d55cbe0fb55)](https://www.codacy.com/app/ryujinwrath/git-commit-message-linter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Rugal/git-commit-message-linter&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/943c0bb74b1a47a6be8579d50e608dba)](https://www.codacy.com/app/ryujinwrath/commitlinter-maven-plugin?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Rugal/commitlinter-maven-plugin&amp;utm_campaign=Badge_Grade)
 [![Dependency Status](https://www.versioneye.com/user/projects/5a172b690fb24f001cf0bd0e/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5a172b690fb24f001cf0bd0e)
 
 # Usage
@@ -25,8 +26,7 @@ mvn commitlinter:validate
 This will report nothing as we haven't configure any linting rules.
 
 ## Show case
-[![asciicast](https://asciinema.org/a/fIZEcdFJRPchLj06JoIXHTfiG.png)](https://asciinema.org/a/fIZEcdFJRPchLj06JoIXHTfiG)
-
+[![asciicast](https://asciinema.org/a/MkGawonrwNZsrq6gRjzpNS9Cd.png)](https://asciinema.org/a/MkGawonrwNZsrq6gRjzpNS9Cd)
 
 # Parameters
 
