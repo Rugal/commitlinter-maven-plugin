@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ga.rugal.maven</groupId>
   <artifactId>commitlinter-maven-plugin</artifactId>
-  <version>1.1</version>
+  <version>1.2</version>
   <packaging>maven-plugin</packaging>
   <name>Git Commit Message Linter Maven Plugin</name>
   <description>The Maven plugin to lint git commit message</description>

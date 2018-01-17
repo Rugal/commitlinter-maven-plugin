@@ -1,29 +1,18 @@
 package ga.rugal.maven.plugin;
 
-import java.io.File;
-
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugin.testing.MojoRule;
-import org.junit.Assert;
-import org.junit.Rule;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
 /**
  *
- * @author Rugal
+ * @author Rugal Bernstein
  */
 @RunWith(Parameterized.class)
-public class MessageValidatorMojoTest {
-
-  private static final String SUCCESS = "success";
-
-  private static final String FAIL = "fail";
-
-  private static final String TEMPLATE = "src/test/resources/unittest/%s/%s.xml";
+public class MessageValidatorMojoXmlTest extends BaseTest {
 
   @Parameters
   public static String[] data() {
@@ -33,27 +22,10 @@ public class MessageValidatorMojoTest {
     };
   }
 
-  @Parameter
-  public String caseFormat;
-
-  @Rule
-  public MojoRule rule = new MojoRule();
-
-  /**
-   * Get Mojo object from each pom file.
-   *
-   * @param file
-   * @return
-   * @throws Exception
-   */
-  private MessageValidatorMojo getMojo(String file) throws Exception {
-    File pom = new File(file);
-    Assert.assertNotNull(pom);
-    Assert.assertTrue(pom.exists());
-
-    MessageValidatorMojo mojo = (MessageValidatorMojo) this.rule.lookupMojo("validate", pom);
-    Assert.assertNotNull(mojo);
-    return mojo;
+  @Before
+  public void setUp() {
+    System.clearProperty("commitlinter.skip");
+    System.clearProperty("commitlinter.failOnError");
   }
 
   /**

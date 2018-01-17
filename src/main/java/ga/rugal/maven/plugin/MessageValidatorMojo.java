@@ -28,6 +28,9 @@ public class MessageValidatorMojo extends AbstractMojo {
 
   private static final String HEAD = "HEAD";
 
+  /**
+   * Also configurable through Maven or System property: ${commitlinter.skip}.
+   */
   @Parameter
   private boolean skip = false;
 
@@ -37,6 +40,9 @@ public class MessageValidatorMojo extends AbstractMojo {
   @Parameter
   private String head = HEAD;
 
+  /**
+   * Also configurable through Maven or System property: ${commitlinter.failOnError}.
+   */
   @Parameter
   private boolean failOnError = false;
 
@@ -93,8 +99,24 @@ public class MessageValidatorMojo extends AbstractMojo {
     return matcher.group().trim();
   }
 
+  /**
+   * Read some property from system property.
+   */
+  private void readSystemProperty() {
+    String skipProperty = System.getProperty("commitlinter.skip");
+    this.skip = (null != skipProperty)
+                  ? Boolean.parseBoolean(skipProperty)
+                  : this.skip;
+
+    String failOnErrorProperty = System.getProperty("commitlinter.failOnError");
+    this.failOnError = (null != failOnErrorProperty)
+                         ? Boolean.parseBoolean(failOnErrorProperty)
+                         : this.failOnError;
+  }
+
   @Override
   public void execute() throws MojoExecutionException, MojoFailureException {
+    this.readSystemProperty();
     if (this.skip) {
       this.getLog().info("Skip Commitlinter");
       return;
