@@ -9,6 +9,9 @@ import java.util.Locale;
  */
 public class CaseRule {
 
+  private CaseRule() {
+  }
+
   /**
    * Check text with given format.
    *

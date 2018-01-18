@@ -7,6 +7,9 @@ package ga.rugal.maven.plugin.rule;
  */
 public class LengthRule {
 
+  private LengthRule() {
+  }
+
   /**
    * Check text length is no more than max.
    *
