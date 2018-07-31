@@ -5,7 +5,6 @@
 [![Build Status](https://travis-ci.org/Rugal/commitlinter-maven-plugin.svg?branch=master)](https://travis-ci.org/Rugal/commitlinter-maven-plugin)
 [![codecov](https://codecov.io/gh/Rugal/commitlinter-maven-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/Rugal/commitlinter-maven-plugin)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/943c0bb74b1a47a6be8579d50e608dba)](https://www.codacy.com/app/ryujinwrath/commitlinter-maven-plugin?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Rugal/commitlinter-maven-plugin&amp;utm_campaign=Badge_Grade)
-[![Dependency Status](https://www.versioneye.com/user/projects/5a172b690fb24f001cf0bd0e/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5a172b690fb24f001cf0bd0e)
 
 # Usage
 This plugin lints your git commit message according to the rules you defined.  
