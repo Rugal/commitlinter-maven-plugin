@@ -58,19 +58,20 @@ public class MessageValidatorMojo extends AbstractMojo {
   /**
    * Get latest commit message from git repository.
    *
-   * @return
-   * @throws IOException
-   * @throws RevisionSyntaxException
+   * @return the most recent commit message
+   *
+   * @throws IOException             when unable to read from file system
+   * @throws RevisionSyntaxException when revision error
    */
   private String getRecentCommitMessage() throws IOException, RevisionSyntaxException {
     try {
       // Open an existing repository
-      FileRepositoryBuilder builder = new FileRepositoryBuilder();
+      final FileRepositoryBuilder builder = new FileRepositoryBuilder();
       builder.setGitDir(new File(this.gitFolder));
-      Repository repository = builder.build();
-      RevWalk walk = new RevWalk(repository);
-      RevCommit commit = walk.parseCommit(repository.resolve(this.head));
-      String commitMessage = commit.getShortMessage();
+      final Repository repository = builder.build();
+      final RevWalk walk = new RevWalk(repository);
+      final RevCommit commit = walk.parseCommit(repository.resolve(this.head));
+      final String commitMessage = commit.getShortMessage();
       walk.dispose();
       this.getLog().debug(String.format("Find commit message from git [%s]", commitMessage));
       return commitMessage;
@@ -83,15 +84,15 @@ public class MessageValidatorMojo extends AbstractMojo {
   /**
    * Extract content from special characters.
    *
-   * @param capturedString
+   * @param capturedString entire commit message
    *
-   * @return
+   * @return the pattern matched string
    *
-   * @throws MojoFailureException
+   * @throws MojoFailureException When Mojo failed
    */
-  private String extractContent(String capturedString) throws MojoFailureException {
-    Pattern pattern = Pattern.compile("[\\w\\d\\s-_]+");
-    Matcher matcher = pattern.matcher(capturedString);
+  private String extractContent(final String capturedString) throws MojoFailureException {
+    final Pattern pattern = Pattern.compile("[\\w\\d\\s-_]+");
+    final Matcher matcher = pattern.matcher(capturedString);
 
     if (!matcher.find()) {
       throw new MojoFailureException(String.format("No content found [%s]", capturedString));
@@ -103,15 +104,15 @@ public class MessageValidatorMojo extends AbstractMojo {
    * Read some property from system property.
    */
   private void readSystemProperty() {
-    String skipProperty = System.getProperty("commitlinter.skip");
+    final String skipProperty = System.getProperty("commitlinter.skip");
     this.skip = (null != skipProperty)
-                  ? Boolean.parseBoolean(skipProperty)
-                  : this.skip;
+                ? Boolean.parseBoolean(skipProperty)
+                : this.skip;
 
-    String failOnErrorProperty = System.getProperty("commitlinter.failOnError");
+    final String failOnErrorProperty = System.getProperty("commitlinter.failOnError");
     this.failOnError = (null != failOnErrorProperty)
-                         ? Boolean.parseBoolean(failOnErrorProperty)
-                         : this.failOnError;
+                       ? Boolean.parseBoolean(failOnErrorProperty)
+                       : this.failOnError;
   }
 
   @Override
@@ -127,8 +128,8 @@ public class MessageValidatorMojo extends AbstractMojo {
         commitMessage = this.testCommitMessage;
         this.getLog().debug(String.format("Use test commit message [%s]", this.testCommitMessage));
       }
-      Pattern pattern = Pattern.compile(this.matchPattern);
-      Matcher matcher = pattern.matcher(commitMessage);
+      final Pattern pattern = Pattern.compile(this.matchPattern);
+      final Matcher matcher = pattern.matcher(commitMessage);
 
       if (!matcher.find()) {
         throw new MojoFailureException(String.format("No pattern matched by Regex: [%s]",
@@ -137,9 +138,9 @@ public class MessageValidatorMojo extends AbstractMojo {
 
       int result = 0;
       for (int i = 1; i <= Math.min(this.captureGroups.length, matcher.groupCount()); i++) {
-        String extractedContent = this.extractContent(matcher.group(i));
+        final String extractedContent = this.extractContent(matcher.group(i));
         this.getLog().debug(extractedContent);
-        RuleChecker checker = new RuleChecker(this.captureGroups[i - 1], this.getLog());
+        final RuleChecker checker = new RuleChecker(this.captureGroups[i - 1], this.getLog());
         result += checker.check(extractedContent);
       }
       if (0 == result) {

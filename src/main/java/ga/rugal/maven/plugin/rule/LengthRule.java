@@ -17,7 +17,7 @@ public class LengthRule {
    * @param max  The maximum length accepted
    * @return If the input string follows the rule
    */
-  public static boolean fitMax(String text, int max) {
+  public static boolean fitMax(final String text, final int max) {
     return text.length() <= max;
   }
 
@@ -28,7 +28,7 @@ public class LengthRule {
    * @param min  The minimum length accepted
    * @return If the input string follows the rule
    */
-  public static boolean fitMin(String text, int min) {
+  public static boolean fitMin(final String text, final int min) {
     return text.length() >= min;
   }
 }

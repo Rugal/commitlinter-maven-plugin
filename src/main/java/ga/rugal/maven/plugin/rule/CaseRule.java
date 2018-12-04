@@ -20,8 +20,8 @@ public class CaseRule {
    *
    * @return If the input string matches the given case format
    */
-  public static boolean validate(String text, Kase pattern) {
-    boolean result;
+  public static boolean validate(final String text, final Kase pattern) {
+    final boolean result;
     switch (pattern) {
       case LOWERCASE:
         result = isLowerCase(text);
@@ -58,7 +58,7 @@ public class CaseRule {
    *
    * @return If the input string matches the given case format
    */
-  private static boolean isCamelCase(String text) {
+  private static boolean isCamelCase(final String text) {
     return !text.contains("_")
            && !text.contains("-")
            && !text.contains(" ");
@@ -72,7 +72,7 @@ public class CaseRule {
    *
    * @return If the input string matches the given case format
    */
-  public static boolean isUpperCamelCase(String text) {
+  public static boolean isUpperCamelCase(final String text) {
     return isCamelCase(text) && Character.isUpperCase(text.charAt(0));
   }
 
@@ -84,7 +84,7 @@ public class CaseRule {
    *
    * @return If the input string matches the given case format
    */
-  public static boolean isLowerCamelCase(String text) {
+  public static boolean isLowerCamelCase(final String text) {
     return isCamelCase(text) && Character.isLowerCase(text.charAt(0));
   }
 
@@ -96,7 +96,7 @@ public class CaseRule {
    *
    * @return If the input string matches the given case format
    */
-  public static boolean isUpperCase(String text) {
+  public static boolean isUpperCase(final String text) {
     return text.toUpperCase(Locale.ENGLISH).equals(text);
   }
 
@@ -108,7 +108,7 @@ public class CaseRule {
    *
    * @return If the input string matches the given case format
    */
-  public static boolean isLowerCase(String text) {
+  public static boolean isLowerCase(final String text) {
     return text.toLowerCase(Locale.ENGLISH).equals(text);
   }
 
@@ -120,7 +120,7 @@ public class CaseRule {
    *
    * @return If the input string matches the given case format
    */
-  public static boolean isKebabCase(String text) {
+  public static boolean isKebabCase(final String text) {
     return text.toLowerCase(Locale.ENGLISH).replaceAll("_", "-").replaceAll(" ", "-").equals(text);
   }
 
@@ -132,7 +132,7 @@ public class CaseRule {
    *
    * @return If the input string matches the given case format
    */
-  public static boolean isSentenceCase(String text) {
+  public static boolean isSentenceCase(final String text) {
     return Character.isUpperCase(text.charAt(0)) && isLowerCase(text.substring(1));
   }
 
@@ -144,7 +144,7 @@ public class CaseRule {
    *
    * @return If the input string matches the given case format
    */
-  public static boolean isSnakeCase(String text) {
+  public static boolean isSnakeCase(final String text) {
     return text.toLowerCase(Locale.ENGLISH).replace(" ", "_").replace("-", "_").equals(text);
   }
 }

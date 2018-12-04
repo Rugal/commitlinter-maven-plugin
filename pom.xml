@@ -39,9 +39,8 @@
   </distributionManagement>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <checkstyle.config.location>checkstyle.xml</checkstyle.config.location>
+    <java.version>1.8</java.version>
+    <org.projectlombok.version>1.18.2</org.projectlombok.version>
   </properties>
   <dependencies>
     <!--Maven Plugin Begin-->
@@ -117,7 +116,6 @@
       <version>1.7.25</version>
     </dependency>
     <!-- Log4j stop -->
-
     <dependency>
       <groupId>org.eclipse.jgit</groupId>
       <artifactId>org.eclipse.jgit</artifactId>
@@ -128,7 +126,6 @@
       <artifactId>lombok</artifactId>
       <version>1.16.18</version>
     </dependency>
-
   </dependencies>
   <build>
     <plugins>
@@ -154,7 +151,18 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>2.17</version>
+        <version>3.0.0</version>
+        <configuration>
+          <configLocation>configuration/checkstyle.xml</configLocation>
+          <excludes>**/generated/**,**/dto/**/*</excludes>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>8.12</version>
+          </dependency>
+        </dependencies>
         <executions>
           <execution>
             <id>validate</id>
@@ -193,6 +201,28 @@
           </execution>
         </executions>
       </plugin>
+      <!-- PMD -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.10.0</version>
+        <configuration>
+          <skip>false</skip>
+          <failOnViolation>true</failOnViolation>
+          <printFailingErrors>true</printFailingErrors>
+          <linkXRef>false</linkXRef>
+          <analysisCache>true</analysisCache>
+          <analysisCacheLocation>${project.build.directory}/pmd.cache</analysisCacheLocation>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <!-- Test Coverage -->
       <plugin>
         <groupId>org.jacoco</groupId>
@@ -219,22 +249,12 @@
           </execution>
         </executions>
       </plugin>
-      <!-- Version Monitor -->
-      <plugin>
-        <groupId>com.versioneye</groupId>
-        <artifactId>versioneye-maven-plugin</artifactId>
-        <version>3.11.4</version>
-        <configuration>
-          <apiKey>bac728ad45c53ac8d553</apiKey>
-          <organisation>rugal_orga</organisation>
-        </configuration>
-      </plugin>
       <!-- GPG signature -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
         <version>1.6</version>
-<!--        <executions>
+        <!--        <executions>
           <execution>
             <id>sign-artifacts</id>
             <phase>verify</phase>
@@ -271,6 +291,28 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <!-- Compiler -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.7.0</version>
+        <configuration>
+          <showDeprecation>true</showDeprecation>
+          <useIncrementalCompilation>false</useIncrementalCompilation>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <compilerArgs>
+            <arg>-Xlint:unchecked</arg>
+          </compilerArgs>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>${org.projectlombok.version}</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
       </plugin>
       <!-- Nexus Start -->
       <plugin>
