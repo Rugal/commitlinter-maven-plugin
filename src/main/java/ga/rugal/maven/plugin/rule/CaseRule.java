@@ -16,7 +16,7 @@ public class CaseRule {
    * Check text with given format.
    *
    * @param text    The input string
-   * @param pattern The case format to accepted
+   * @param pattern The case format to accept
    *
    * @return If the input string matches the given case format
    */
