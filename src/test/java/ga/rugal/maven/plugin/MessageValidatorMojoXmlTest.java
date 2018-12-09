@@ -18,7 +18,8 @@ public class MessageValidatorMojoXmlTest extends BaseTest {
   public static String[] data() {
     return new String[]{
       "lowercase", "uppercase", "uppercamelcase", "lowercamelcase", "sentencecase", "kebabcase",
-      "snakecase", "none", "max", "min", "skip", "unmatch", "nocontent", "head", "gitfolder"
+      "snakecase", "none", "max", "min", "skip", "unmatch", "nocontent", "head", "gitfolder",
+      "present", "past", "thirdparty"
     };
   }
 
@@ -36,8 +37,7 @@ public class MessageValidatorMojoXmlTest extends BaseTest {
   @Test
   public void caseSuccess() throws Exception {
     System.out.println(String.format("%s on %s", SUCCESS, this.caseFormat));
-    MessageValidatorMojo mojo = this.getMojo(String.format(TEMPLATE, this.caseFormat, SUCCESS));
-    mojo.execute();
+    this.getMojo(this.caseFormat, SUCCESS).execute();
   }
 
   /**
@@ -48,7 +48,6 @@ public class MessageValidatorMojoXmlTest extends BaseTest {
   @Test(expected = MojoFailureException.class)
   public void caseFail() throws Exception {
     System.out.println(String.format("%s on %s", FAIL, this.caseFormat));
-    MessageValidatorMojo mojo = this.getMojo(String.format(TEMPLATE, this.caseFormat, FAIL));
-    mojo.execute();
+    this.getMojo(this.caseFormat, FAIL).execute();
   }
 }

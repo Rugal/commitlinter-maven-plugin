@@ -6,7 +6,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-
 /**
  *
  * @author Rugal Bernstein
@@ -30,8 +29,7 @@ public class MessageValidatorMojoFailOnErrorTest extends BaseTest {
   public void caseSuccess() throws Exception {
     System.setProperty("commitlinter.failOnError", "false");
     System.out.println(String.format("%s on %s", SUCCESS, this.caseFormat));
-    MessageValidatorMojo mojo = this.getMojo(String.format(TEMPLATE, this.caseFormat, SUCCESS));
-    mojo.execute();
+    this.getMojo(this.caseFormat, SUCCESS).execute();
   }
 
   /**
@@ -43,7 +41,6 @@ public class MessageValidatorMojoFailOnErrorTest extends BaseTest {
   public void caseFail() throws Exception {
     System.setProperty("commitlinter.failOnError", "true");
     System.out.println(String.format("%s on %s", FAIL, this.caseFormat));
-    MessageValidatorMojo mojo = this.getMojo(String.format(TEMPLATE, this.caseFormat, FAIL));
-    mojo.execute();
+    this.getMojo(this.caseFormat, FAIL).execute();
   }
 }

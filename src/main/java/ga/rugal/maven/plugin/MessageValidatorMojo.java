@@ -100,6 +100,16 @@ public class MessageValidatorMojo extends AbstractMojo {
     return matcher.group().trim();
   }
 
+  private Matcher patternMatcher() throws RevisionSyntaxException, IOException {
+    String commitMessage = this.getRecentCommitMessage();
+    if (null != this.testCommitMessage) {
+      commitMessage = this.testCommitMessage;
+      this.getLog().debug(String.format("Use test commit message [%s]", this.testCommitMessage));
+    }
+    final Pattern pattern = Pattern.compile(this.matchPattern);
+    return pattern.matcher(commitMessage);
+  }
+
   /**
    * Read some property from system property.
    */
@@ -123,14 +133,7 @@ public class MessageValidatorMojo extends AbstractMojo {
       return;
     }
     try {
-      String commitMessage = this.getRecentCommitMessage();
-      if (null != this.testCommitMessage) {
-        commitMessage = this.testCommitMessage;
-        this.getLog().debug(String.format("Use test commit message [%s]", this.testCommitMessage));
-      }
-      final Pattern pattern = Pattern.compile(this.matchPattern);
-      final Matcher matcher = pattern.matcher(commitMessage);
-
+      final Matcher matcher = this.patternMatcher();
       if (!matcher.find()) {
         throw new MojoFailureException(String.format("No pattern matched by Regex: [%s]",
                                                      this.matchPattern));

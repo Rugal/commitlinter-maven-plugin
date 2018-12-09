@@ -4,7 +4,7 @@ import java.util.Locale;
 import java.util.Set;
 
 import com.google.common.collect.ImmutableSet;
-import edu.stanford.nlp.simple.Document;
+import edu.stanford.nlp.simple.Sentence;
 
 /**
  * Check tense related rules.
@@ -23,8 +23,9 @@ public class TenseRule {
   }
 
   private static boolean matchTense(final Set<String> pattern, final String word) {
-    final Document doc = new Document(word);
-    return pattern.contains(doc.sentences().get(0).nerTag(0).toUpperCase(Locale.US));
+    final Sentence sent = new Sentence(word);
+    final String toUpperCase = sent.posTag(0).toUpperCase(Locale.US);
+    return pattern.contains(toUpperCase);
   }
 
   /**

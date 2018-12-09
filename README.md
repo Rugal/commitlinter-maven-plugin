@@ -35,6 +35,7 @@ captureGroups| CaptureGroup[] | List of CaptureGroups | []
 captureGroup.caseFormat | enum | The case format we want to lint | NONE
 captureGroup.max | Integer | The maximum length of this capture group | Integer.MAX
 captureGroup.min | Integer | The minimum length of this capture group | 0
+captureGroup.tense | enum | The tense of the initial word of this capture group | NONE
 failOnError|Boolean | Whether to fail maven build on linting error | false
 gitFolder|String|The git repository folder| .git
 head|String | The pointer of git | HEAD
@@ -54,6 +55,15 @@ KEBABCASE | this-is-kebab-case
 SNAKECASE | this_is_snake_case
 SENTENCECASE | This is sentence case
 NONE | ANY_case-you Like
+
+## tense
+
+case | sample
+---|---
+PRESENT | add new feature/create a function  
+PAST |  added new feature/created a function  
+THIRD_PARTY | adds new feature/creates a function
+NONE |  any format you like
 
 # Simple Example
 Please always make sure to wrap the capture group with `()` so the Regex matcher can capture it.  
@@ -76,6 +86,7 @@ Please always make sure to wrap the capture group with `()` so the Regex matcher
       </captureGroup>
       <captureGroup>
         <max>20</max>
+        <tense>PRESENT</tense>
         <caseFormat>LOWERCASE</caseFormat>
       </captureGroup>
     </captureGroups>

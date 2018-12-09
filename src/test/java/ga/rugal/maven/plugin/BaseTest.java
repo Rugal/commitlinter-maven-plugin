@@ -19,7 +19,7 @@ public class BaseTest {
 
   public static final String FAIL = "fail";
 
-  public static final String TEMPLATE = "src/test/resources/unittest/%s/%s.xml";
+  private static final String TEMPLATE = "src/test/resources/unittest/%s/%s.xml";
 
   @Parameter
   public String caseFormat;
@@ -30,16 +30,21 @@ public class BaseTest {
   /**
    * Get Mojo object from each pom file.
    *
-   * @param file
-   * @return
-   * @throws Exception
+   * @param caseFormat string case format
+   * @param result     expected result
+   *
+   * @return created mojo
+   *
+   * @throws Exception unable to find target mojo
    */
-  protected MessageValidatorMojo getMojo(String file) throws Exception {
-    File pom = new File(file);
+  protected MessageValidatorMojo getMojo(final String caseFormat,
+                                         final String result) throws Exception {
+    final File pom = new File(String.format(TEMPLATE, caseFormat, result));
+    Assert.assertTrue(pom.exists());
     Assert.assertNotNull(pom);
     Assert.assertTrue(pom.exists());
 
-    MessageValidatorMojo mojo = (MessageValidatorMojo) this.rule.lookupMojo("validate", pom);
+    final MessageValidatorMojo mojo = (MessageValidatorMojo) this.rule.lookupMojo("validate", pom);
     Assert.assertNotNull(mojo);
     return mojo;
   }

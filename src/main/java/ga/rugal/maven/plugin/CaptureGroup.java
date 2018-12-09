@@ -1,8 +1,9 @@
 package ga.rugal.maven.plugin;
 
 import ga.rugal.maven.plugin.rule.Kase;
+import ga.rugal.maven.plugin.rule.Tense;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
  *
  * @author Rugal Bernstein
  */
-@Data
+@Getter
 @NoArgsConstructor
 public class CaptureGroup {
 
@@ -19,4 +20,6 @@ public class CaptureGroup {
   private int max = Integer.MAX_VALUE;
 
   private int min = 0;
+
+  private Tense tense = Tense.NONE;
 }
