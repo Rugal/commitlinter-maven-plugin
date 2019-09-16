@@ -24,4 +24,3 @@ jobs:
           key: v1-commitlinter-{{ checksum "pom.xml" }}
           paths:
             - ~/.m2
-
