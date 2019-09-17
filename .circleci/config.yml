@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:8-jdk-node-browsers
+      - image: circleci/openjdk:11-jdk
 
     steps:
       - checkout
@@ -16,10 +16,12 @@ jobs:
           command: |
             mkdir -p ~/junit/
             find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/junit/ \;
-            find . -type f -regex ".*/target/failsafe-reports/.*xml" -exec cp {} ~/junit/ \;
           when: always
       - store_test_results:
           path: ~/junit
+      - store_artifacts:
+          path: target/site
+      - run: curl -s https://codecov.io/bash | bash
       - save_cache:
           key: v1-commitlinter-{{ checksum "pom.xml" }}
           paths:
