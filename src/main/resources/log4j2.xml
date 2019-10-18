@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="ERROR">
-    <Properties>
-        <Property name="filename">target/app.log</Property>
-    </Properties>
-    <Appenders>
-        <Console name="STDOUT">
-            <PatternLayout>
-                <Pattern>
-                    %date{yyyy-mm-dd HH:mm} - %highlight{[%-5level]}{FATAL=Yellow, ERROR=red, WARN=Magenta, INFO=Bright Green, DEBUG=Bright Cyan, TRACE=Bright White} %class#%line - %message %n
-                </Pattern>
-            </PatternLayout>
-        </Console>
-        <RollingRandomAccessFile name="ROLL" fileName="target/app.log" filePattern="target/app-%d{yyyy-MM-dd-HH-mm}.log.gz">
-            <PatternLayout>
-                <Pattern>
-                    %date{yyyy-mm-dd HH:mm} - %highlight{[%-5level]}{FATAL=Yellow, ERROR=red, WARN=Magenta, INFO=Bright Green, DEBUG=Bright Cyan, TRACE=Bright White} %class#%line - %message %n
-                </Pattern>
-            </PatternLayout>
-            <Policies>
-                <TimeBasedTriggeringPolicy />
-                <SizeBasedTriggeringPolicy size="8 MB"/>
-            </Policies>
-        </RollingRandomAccessFile>
-    </Appenders>
-    <Loggers>
-        <Root level="ERROR">
-            <AppenderRef ref="STDOUT"/>
-            <AppenderRef ref="ROLL"/>
-        </Root>
-        <Logger name="ga.rugal" level="INFO" additivity="false">
-            <AppenderRef ref="STDOUT"/>
-            <AppenderRef ref="ROLL"/>
-        </Logger>
-        <Logger name="config" level="TRACE" additivity="false">
-            <AppenderRef ref="STDOUT"/>
-            <AppenderRef ref="ROLL"/>
-        </Logger>
-        <Logger name="org.eclipse.jgit" level="ERROR" Additivity="false">
-        </Logger>
-    </Loggers>
+  <Properties>
+    <Property name="filename">target/app.log</Property>
+  </Properties>
+  <Appenders>
+    <Console name="STDOUT">
+      <PatternLayout>
+        <Pattern>
+          %date{yyyy-mm-dd HH:mm} - %highlight{[%-5level]}{FATAL=Yellow, ERROR=red, WARN=Magenta, INFO=Bright Green, DEBUG=Bright Cyan, TRACE=Bright White} %class#%line - %message %n
+        </Pattern>
+      </PatternLayout>
+    </Console>
+    <RollingRandomAccessFile name="ROLL" fileName="target/app.log" filePattern="target/app-%d{yyyy-MM-dd-HH-mm}.log.gz">
+      <PatternLayout>
+        <Pattern>
+          %date{yyyy-mm-dd HH:mm} - %highlight{[%-5level]}{FATAL=Yellow, ERROR=red, WARN=Magenta, INFO=Bright Green, DEBUG=Bright Cyan, TRACE=Bright White} %class#%line - %message %n
+        </Pattern>
+      </PatternLayout>
+      <Policies>
+        <TimeBasedTriggeringPolicy />
+        <SizeBasedTriggeringPolicy size="8 MB"/>
+      </Policies>
+    </RollingRandomAccessFile>
+  </Appenders>
+  <Loggers>
+    <Root level="ERROR">
+      <AppenderRef ref="STDOUT"/>
+      <AppenderRef ref="ROLL"/>
+    </Root>
+    <Logger name="ga.rugal" level="INFO" additivity="false">
+      <AppenderRef ref="STDOUT"/>
+      <AppenderRef ref="ROLL"/>
+    </Logger>
+    <Logger name="config" level="TRACE" additivity="false">
+      <AppenderRef ref="STDOUT"/>
+      <AppenderRef ref="ROLL"/>
+    </Logger>
+    <Logger name="org.eclipse.jgit" level="ERROR" Additivity="false">
+    </Logger>
+  </Loggers>
 </Configuration>
