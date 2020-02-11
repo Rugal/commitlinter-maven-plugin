@@ -2,6 +2,7 @@ package ga.rugal.maven.plugin;
 
 import java.io.File;
 
+import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.testing.MojoRule;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -30,6 +31,7 @@ public class BaseTest {
   /**
    * Get Mojo object from each pom file.
    *
+   * @param mojoName   name of mojo
    * @param caseFormat string case format
    * @param result     expected result
    *
@@ -37,15 +39,14 @@ public class BaseTest {
    *
    * @throws Exception unable to find target mojo
    */
-  protected MessageValidatorMojo getMojo(final String caseFormat,
-                                         final String result) throws Exception {
+  protected AbstractMojo getMojo(final String mojoName,
+                                 final String caseFormat,
+                                 final String result) throws Exception {
     final File pom = new File(String.format(TEMPLATE, caseFormat, result));
     Assert.assertTrue(pom.exists());
     Assert.assertNotNull(pom);
     Assert.assertTrue(pom.exists());
 
-    final MessageValidatorMojo mojo = (MessageValidatorMojo) this.rule.lookupMojo("validate", pom);
-    Assert.assertNotNull(mojo);
-    return mojo;
+    return (AbstractMojo) this.rule.lookupMojo(mojoName, pom);
   }
 }

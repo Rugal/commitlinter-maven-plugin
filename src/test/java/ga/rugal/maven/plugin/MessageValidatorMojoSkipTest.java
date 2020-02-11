@@ -29,7 +29,7 @@ public class MessageValidatorMojoSkipTest extends BaseTest {
   public void caseSuccess() throws Exception {
     System.setProperty("commitlinter.skip", "true");
     System.out.println(String.format("%s on %s", SUCCESS, this.caseFormat));
-    this.getMojo(this.caseFormat, SUCCESS).execute();
+    this.getMojo("validate", this.caseFormat, SUCCESS).execute();
   }
 
   /**
@@ -41,6 +41,6 @@ public class MessageValidatorMojoSkipTest extends BaseTest {
   public void caseFail() throws Exception {
     System.setProperty("commitlinter.skip", "false");
     System.out.println(String.format("%s on %s", FAIL, this.caseFormat));
-    this.getMojo(this.caseFormat, FAIL).execute();
+    this.getMojo("validate", this.caseFormat, FAIL).execute();
   }
 }

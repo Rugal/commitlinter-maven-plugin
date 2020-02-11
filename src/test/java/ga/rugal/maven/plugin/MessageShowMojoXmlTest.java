@@ -1,6 +1,5 @@
 package ga.rugal.maven.plugin;
 
-import org.apache.maven.plugin.MojoFailureException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,14 +11,12 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Rugal Bernstein
  */
 @RunWith(Parameterized.class)
-public class MessageValidatorMojoXmlTest extends BaseTest {
+public class MessageShowMojoXmlTest extends BaseTest {
 
   @Parameters
   public static String[] data() {
     return new String[]{
-      "lowercase", "uppercase", "uppercamelcase", "lowercamelcase", "sentencecase", "kebabcase",
-      "snakecase", "none", "max", "min", "skip", "unmatch", "nocontent", "head", "gitfolder",
-      "present", "past", "thirdparty"
+      "lowercase"
     };
   }
 
@@ -37,17 +34,6 @@ public class MessageValidatorMojoXmlTest extends BaseTest {
   @Test
   public void caseSuccess() throws Exception {
     System.out.println(String.format("%s on %s", SUCCESS, this.caseFormat));
-    this.getMojo("validate", this.caseFormat, SUCCESS).execute();
-  }
-
-  /**
-   * These tests should fail.
-   *
-   * @throws Exception
-   */
-  @Test(expected = MojoFailureException.class)
-  public void caseFail() throws Exception {
-    System.out.println(String.format("%s on %s", FAIL, this.caseFormat));
-    this.getMojo("validate", this.caseFormat, FAIL).execute();
+    this.getMojo("show", this.caseFormat, SUCCESS).execute();
   }
 }

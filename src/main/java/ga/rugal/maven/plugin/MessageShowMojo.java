@@ -1,22 +1,22 @@
 package ga.rugal.maven.plugin;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.eclipse.jgit.errors.RevisionSyntaxException;
 
 /**
- * Validate Git commit message.
+ * Show commit linter configuration and basic git information.
  *
  * @author Rugal
  */
-@Mojo(name = "validate")
-public class MessageValidatorMojo extends AbstractMojo {
+@Mojo(name = "show")
+public class MessageShowMojo extends AbstractMojo {
 
   /**
    * Also configurable through Maven or System property: ${commitlinter.skip}.
@@ -63,34 +63,30 @@ public class MessageValidatorMojo extends AbstractMojo {
   @Override
   public void execute() throws MojoExecutionException, MojoFailureException {
     this.readSystemProperty();
-    if (this.skip) {
-      this.getLog().info("Skip Commitlinter");
-      return;
-    }
+    final Log log = this.getLog();
+    final GitWalker walker = new GitWalker(this.getLog(),
+                                           this.gitFolder,
+                                           this.head,
+                                           this.matchPattern,
+                                           this.testCommitMessage);
     try {
-      final GitWalker walker = new GitWalker(this.getLog(),
-                                             this.gitFolder,
-                                             this.head,
-                                             this.matchPattern,
-                                             this.testCommitMessage);
-      final Matcher matcher = walker.patternMatcher();
-      if (!matcher.find()) {
-        throw new MojoFailureException(String.format("No pattern matched by Regex: [%s]",
-                                                     this.matchPattern));
-      }
-
-      int result = 0;
-      for (int i = 1; i <= Math.min(this.captureGroups.length, matcher.groupCount()); i++) {
-        final String extractedContent = walker.extractContent(matcher.group(i));
-        this.getLog().debug(extractedContent);
-        final RuleChecker checker = new RuleChecker(this.captureGroups[i - 1], this.getLog());
-        result += checker.check(extractedContent);
-      }
-      if (0 == result) {
-        return;
-      }
-      if (this.failOnError) {
-        throw new MojoFailureException("Commit Lint failed, please check rules");
+      final String string = String.format(Constant.LOG_FORMAT,
+                                          "skip", this.skip,
+                                          "failOnError", this.failOnError,
+                                          "gitFolder", this.gitFolder,
+                                          "head", this.head,
+                                          "testCommitMessage", this.testCommitMessage,
+                                          "matchPattern", this.matchPattern,
+                                          "CommitMessage", walker.getRecentCommitMessage());
+      log.info("Basic Configuration");
+      log.info(string);
+      log.info("Capture Group Definition:");
+      for (CaptureGroup group : this.captureGroups) {
+        log.info(String.format(Constant.CAPTURE_LOG_FORMAT,
+                               "CaseFormat", group.getCaseFormat(),
+                               "Tense", group.getTense(),
+                               "MinimunLength", group.getMin(),
+                               "MaximumLength", group.getMax()));
       }
     } catch (IOException | RevisionSyntaxException | NullPointerException ex) {
       throw new MojoFailureException("Unable to lint commit message due to git repository error");
