@@ -9,7 +9,7 @@
 
   <groupId>ga.rugal.maven</groupId>
   <artifactId>commitlinter-maven-plugin</artifactId>
-  <version>1.5.0</version>
+  <version>1.6.0-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
   <name>Git Commit Message Linter Maven Plugin</name>
   <description>The Maven plugin to lint and validate git commit message</description>
@@ -27,7 +27,7 @@
     <connection>scm:git:git@github.com:Rugal/commitlinter-maven-plugin.git</connection>
     <url>git@github.com:Rugal/commitlinter-maven-plugin.git</url>
     <developerConnection>scm:git:git@github.com:Rugal/commitlinter-maven-plugin.git</developerConnection>
-    <tag>v1.5.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <dependencies>
