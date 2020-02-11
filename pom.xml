@@ -6,8 +6,9 @@
   <parent>
     <groupId>ga.rugal</groupId>
     <artifactId>parent</artifactId>
-    <version>1.5.0</version>
+    <version>1.8.0</version>
   </parent>
+
   <groupId>ga.rugal.maven</groupId>
   <artifactId>commitlinter-maven-plugin</artifactId>
   <version>1.4.0</version>
