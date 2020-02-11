@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>ga.rugal</groupId>
@@ -11,7 +9,7 @@
 
   <groupId>ga.rugal.maven</groupId>
   <artifactId>commitlinter-maven-plugin</artifactId>
-  <version>1.4.0</version>
+  <version>1.5.0-SNAPSHOT</version>
   <packaging>maven-plugin</packaging>
   <name>Git Commit Message Linter Maven Plugin</name>
   <description>The Maven plugin to lint and validate git commit message</description>

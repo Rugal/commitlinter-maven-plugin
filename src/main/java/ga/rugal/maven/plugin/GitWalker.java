@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
 import org.eclipse.jgit.errors.RevisionSyntaxException;
@@ -19,18 +19,18 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
  *
  * @author Rugal Bernstein
  */
-@Value
+@AllArgsConstructor
 public class GitWalker {
 
-  private Log log;
+  private final Log log;
 
-  private String gitFolder;
+  private final String gitFolder;
 
-  private String head;
+  private final String head;
 
-  private String matchPattern;
+  private final String matchPattern;
 
-  private String testCommitMessage;
+  private final String testCommitMessage;
 
   /**
    * Get latest commit message from git repository.

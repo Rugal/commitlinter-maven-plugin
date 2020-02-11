@@ -47,6 +47,8 @@ public class BaseTest {
     Assert.assertNotNull(pom);
     Assert.assertTrue(pom.exists());
 
-    return (AbstractMojo) this.rule.lookupMojo(mojoName, pom);
+    final AbstractMojo mojo = (AbstractMojo) this.rule.lookupMojo(mojoName, pom);
+    Assert.assertNotNull(mojo);
+    return mojo;
   }
 }
