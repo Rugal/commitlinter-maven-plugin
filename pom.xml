@@ -21,6 +21,8 @@
     <skip.surefire.tests>false</skip.surefire.tests>
     <!-- dependency -->
     <stanford.version>3.9.2</stanford.version>
+    <!-- plugin -->
+    <sisu.plugin.version>0.3.4</sisu.plugin.version>
   </properties>
 
   <scm>
@@ -168,6 +170,21 @@
         <artifactId>maven-release-plugin</artifactId>
       </plugin>
       <!-- Nexus End -->
+      <!-- sisu index -->
+      <plugin>
+        <groupId>org.eclipse.sisu</groupId>
+        <artifactId>sisu-maven-plugin</artifactId>
+        <version>${sisu.plugin.version}</version>
+        <!--http://maven.apache.org/maven-jsr330.html-->
+        <executions>
+          <execution>
+            <id>generate-index</id>
+            <goals>
+              <goal>main-index</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 </project>
