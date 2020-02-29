@@ -17,8 +17,8 @@
 
   <properties>
     <!-- configuration -->
-    <jacoco.skip.coverage.check>false</jacoco.skip.coverage.check>
-    <skip.surefire.tests>false</skip.surefire.tests>
+    <jacoco.skip.coverage.check>true</jacoco.skip.coverage.check>
+    <skip.surefire.tests>true</skip.surefire.tests>
     <!-- dependency -->
     <stanford.version>3.9.2</stanford.version>
     <!-- plugin -->
