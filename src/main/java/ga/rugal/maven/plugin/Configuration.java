@@ -1,5 +1,6 @@
 package ga.rugal.maven.plugin;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.Builder;
 import lombok.Value;
 
@@ -9,6 +10,7 @@ import lombok.Value;
  * @author rugal
  */
 @Builder
+@SuppressFBWarnings({"EI_EXPOSE_REP", "EI_EXPOSE_REP2"})
 @Value
 public class Configuration {
 

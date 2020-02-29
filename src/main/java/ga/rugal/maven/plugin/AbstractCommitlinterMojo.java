@@ -64,21 +64,23 @@ public abstract class AbstractCommitlinterMojo extends AbstractMojo {
 
   private Configuration getConfiguration() {
     final Map<String, String> map = this.readSystemProperty();
-    this.failOnError = Boolean.parseBoolean(map.getOrDefault(Constant.FAIL_ON_ERROR, "false"));
+    this.failOnError = Boolean.parseBoolean(map.getOrDefault(Constant.FAIL_ON_ERROR,
+                                                             Boolean.toString(this.failOnError)));
     this.gitFolder = map.getOrDefault(Constant.GIT_FOLDER, this.gitFolder);
     this.head = map.getOrDefault(Constant.HEAD, this.head);
     this.matchPattern = map.getOrDefault(Constant.MATCH_PATTERN, this.matchPattern);
-    this.skip = Boolean.parseBoolean(map.getOrDefault(Constant.SKIP, "false"));
+    this.skip = Boolean.parseBoolean(map.getOrDefault(Constant.SKIP,
+                                                      Boolean.toString(this.skip)));
     this.testCommitMessage = map.getOrDefault(Constant.TEST_COMMIT_MESSAGE, this.testCommitMessage);
 
     return Configuration.builder()
-            .captureGroups(captureGroups)
-            .failOnError(failOnError)
-            .gitFolder(gitFolder)
-            .head(head)
-            .matchPattern(matchPattern)
-            .skip(skip)
-            .testCommitMessage(testCommitMessage)
+            .captureGroups(this.captureGroups)
+            .failOnError(this.failOnError)
+            .gitFolder(this.gitFolder)
+            .head(this.head)
+            .matchPattern(this.matchPattern)
+            .skip(this.skip)
+            .testCommitMessage(this.testCommitMessage)
             .build();
   }
 
@@ -88,8 +90,8 @@ public abstract class AbstractCommitlinterMojo extends AbstractMojo {
    * @param configuration all preset configuration, priority is 1. system property 2. configuration
    *                      3. default value
    *
-   * @throws MojoExecutionException
-   * @throws MojoFailureException
+   * @throws MojoExecutionException when execution has any problem
+   * @throws MojoFailureException   when fail the execution
    */
   public abstract void execute(Configuration configuration) throws MojoExecutionException,
                                                                    MojoFailureException;

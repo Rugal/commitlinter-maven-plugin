@@ -25,8 +25,8 @@ public class MessageValidatorMojoXmlTest extends BaseTest {
 
   @Before
   public void setUp() {
-    System.clearProperty("commitlinter.skip");
-    System.clearProperty("commitlinter.failOnError");
+    System.clearProperty(Constant.SKIP);
+    System.clearProperty(Constant.FAIL_ON_ERROR);
   }
 
   /**

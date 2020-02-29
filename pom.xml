@@ -107,6 +107,11 @@
       <version>${stanford.version}</version>
       <classifier>models</classifier>
     </dependency>
+    <!-- spotbugs -->
+    <dependency>
+      <groupId>com.github.spotbugs</groupId>
+      <artifactId>spotbugs-annotations</artifactId>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
