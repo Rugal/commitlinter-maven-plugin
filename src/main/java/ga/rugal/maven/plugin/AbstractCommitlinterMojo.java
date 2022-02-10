@@ -49,7 +49,7 @@ public abstract class AbstractCommitlinterMojo extends AbstractMojo {
   /**
    * Group system property into map.
    *
-   * @return
+   * @return the complete environment variables
    */
   private Map<String, String> readSystemProperty() {
     final Map<String, String> map = new HashMap<>();

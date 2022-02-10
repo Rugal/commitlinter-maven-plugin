@@ -4,7 +4,7 @@
   <parent>
     <groupId>ga.rugal</groupId>
     <artifactId>parent</artifactId>
-    <version>1.8.0</version>
+    <version>1.13.1</version>
   </parent>
 
   <groupId>ga.rugal.maven</groupId>
@@ -20,9 +20,9 @@
     <jacoco.skip.coverage.check>true</jacoco.skip.coverage.check>
     <skip.surefire.tests>true</skip.surefire.tests>
     <!-- dependency -->
-    <stanford.version>3.9.2</stanford.version>
+    <stanford.version>4.4.0</stanford.version>
     <!-- plugin -->
-    <sisu.plugin.version>0.3.4</sisu.plugin.version>
+    <sisu.plugin.version>0.3.5</sisu.plugin.version>
   </properties>
 
   <scm>
