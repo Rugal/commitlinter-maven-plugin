@@ -1,5 +1,6 @@
 package ga.rugal.maven.plugin;
 
+import lombok.SneakyThrows;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,8 +32,9 @@ public class MessageShowMojoXmlTest extends BaseTest {
    *
    * @throws Exception
    */
+  @SneakyThrows
   @Test
-  public void caseSuccess() throws Exception {
+  public void caseSuccess() {
     System.out.println(String.format("%s on %s", SUCCESS, this.caseFormat));
     this.getMojo("show", this.caseFormat, SUCCESS).execute();
   }

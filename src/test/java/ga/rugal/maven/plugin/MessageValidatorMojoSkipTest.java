@@ -1,5 +1,6 @@
 package ga.rugal.maven.plugin;
 
+import lombok.SneakyThrows;
 import org.apache.maven.plugin.MojoFailureException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,8 +26,9 @@ public class MessageValidatorMojoSkipTest extends BaseTest {
    *
    * @throws Exception
    */
+  @SneakyThrows
   @Test
-  public void caseSuccess() throws Exception {
+  public void caseSuccess() {
     System.setProperty("commitlinter.skip", "true");
     System.out.println(String.format("%s on %s", SUCCESS, this.caseFormat));
     this.getMojo("validate", this.caseFormat, SUCCESS).execute();
@@ -37,8 +39,9 @@ public class MessageValidatorMojoSkipTest extends BaseTest {
    *
    * @throws Exception
    */
+  @SneakyThrows
   @Test(expected = MojoFailureException.class)
-  public void caseFail() throws Exception {
+  public void caseFail() {
     System.setProperty("commitlinter.skip", "false");
     System.out.println(String.format("%s on %s", FAIL, this.caseFormat));
     this.getMojo("validate", this.caseFormat, FAIL).execute();

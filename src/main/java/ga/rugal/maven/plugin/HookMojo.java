@@ -3,6 +3,7 @@ package ga.rugal.maven.plugin;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -30,7 +31,7 @@ public class HookMojo extends AbstractCommitlinterMojo {
     final String target = String.format("%s/hooks/commit-msg", c.getGitFolder());
     final File file = new File(target);
     log.info(String.format("Write hook file to [%s]", target));
-    try (FileWriter fileWriter = new FileWriter(file)) {
+    try (FileWriter fileWriter = new FileWriter(file, Charset.defaultCharset())) {
       fileWriter.write(CONTENT);
     } catch (final IOException ex) {
       log.error("Unable to write file", ex);

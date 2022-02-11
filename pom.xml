@@ -24,11 +24,16 @@
     <!-- plugin -->
     <sisu.plugin.version>0.3.5</sisu.plugin.version>
   </properties>
+  
+  <issueManagement>
+    <system>github issue</system>
+    <url>https://github.com/Rugal/commitlinter-maven-plugin/issues</url>
+  </issueManagement>
 
   <scm>
-    <connection>scm:git:git@github.com:Rugal/commitlinter-maven-plugin.git</connection>
-    <url>git@github.com:Rugal/commitlinter-maven-plugin.git</url>
-    <developerConnection>scm:git:git@github.com:Rugal/commitlinter-maven-plugin.git</developerConnection>
+    <url>https://github.com/Rugal/commitlinter-maven-plugin</url>
+    <connection>scm:git:git://github.com/Rugal/commitlinter-maven-plugin</connection>
+    <developerConnection>scm:git:git://github.com/Rugal/commitlinter-maven-plugin</developerConnection>
     <tag>HEAD</tag>
   </scm>
 
@@ -63,30 +68,6 @@
       <artifactId>maven-plugin-testing-harness</artifactId>
       <scope>test</scope>
     </dependency>
-    <!-- Logging -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-    </dependency>
-    <!-- Binding for Log4J -->
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-slf4j-impl</artifactId>
-    </dependency>
-    <!-- Log4j API and Core implementation required for binding -->
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jcl-over-slf4j</artifactId>
-    </dependency>
-    <!-- Log4j stop -->
     <dependency>
       <groupId>org.eclipse.jgit</groupId>
       <artifactId>org.eclipse.jgit</artifactId>
@@ -119,6 +100,18 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-plugin-plugin</artifactId>
+      </plugin>
+      <!-- site reporting -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.10.0</version>
+      </plugin>
+      <!-- project info -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>3.2.1</version>
       </plugin>
       <!-- checkstyle -->
       <plugin>
@@ -180,7 +173,7 @@
         <groupId>org.eclipse.sisu</groupId>
         <artifactId>sisu-maven-plugin</artifactId>
         <version>${sisu.plugin.version}</version>
-        <!--http://maven.apache.org/maven-jsr330.html-->
+        <!-- http://maven.apache.org/maven-jsr330.html -->
         <executions>
           <execution>
             <id>generate-index</id>
