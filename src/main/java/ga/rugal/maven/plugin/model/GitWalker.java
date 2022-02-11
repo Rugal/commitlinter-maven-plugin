@@ -1,4 +1,4 @@
-package ga.rugal.maven.plugin;
+package ga.rugal.maven.plugin.model;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package ga.rugal.maven.plugin;
+package ga.rugal.maven.plugin.model;
 
 import ga.rugal.maven.plugin.rule.Kase;
 import ga.rugal.maven.plugin.rule.Tense;

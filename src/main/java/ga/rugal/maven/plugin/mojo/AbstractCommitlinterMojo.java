@@ -1,7 +1,11 @@
-package ga.rugal.maven.plugin;
+package ga.rugal.maven.plugin.mojo;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import ga.rugal.maven.plugin.Configuration;
+import ga.rugal.maven.plugin.Constant;
+import ga.rugal.maven.plugin.model.CaptureGroup;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;

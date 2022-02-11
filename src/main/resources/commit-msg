@@ -1,0 +1,4 @@
+#!/bin/bash
+file=$1
+message=`cat $file`
+mvn ga.rugal.maven:commitlinter-maven-plugin:validate -DtestCommitMessage=${message}

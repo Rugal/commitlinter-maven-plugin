@@ -1,5 +1,7 @@
 package ga.rugal.maven.plugin;
 
+import ga.rugal.maven.plugin.model.CaptureGroup;
+
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.Builder;
 import lombok.Value;

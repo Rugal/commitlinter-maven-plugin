@@ -3,4 +3,8 @@
   <Match>
     <Package name="~ga\.rugal\.demo\.swagger.*" />
   </Match>
+  <Match>
+    <Class name="ga.rugal.maven.plugin.mojo.HookMojo" />
+    <Bug pattern="UI_INHERITANCE_UNSAFE_GETRESOURCE" />
+  </Match>
 </FindBugsFilter>

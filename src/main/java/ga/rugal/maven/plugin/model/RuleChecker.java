@@ -1,4 +1,4 @@
-package ga.rugal.maven.plugin;
+package ga.rugal.maven.plugin.model;
 
 import ga.rugal.maven.plugin.rule.CaseRule;
 import ga.rugal.maven.plugin.rule.LengthRule;

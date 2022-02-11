@@ -1,6 +1,11 @@
-package ga.rugal.maven.plugin;
+package ga.rugal.maven.plugin.mojo;
 
 import java.io.IOException;
+
+import ga.rugal.maven.plugin.Configuration;
+import ga.rugal.maven.plugin.Constant;
+import ga.rugal.maven.plugin.model.CaptureGroup;
+import ga.rugal.maven.plugin.model.GitWalker;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
