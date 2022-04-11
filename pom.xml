@@ -4,7 +4,7 @@
   <parent>
     <groupId>ga.rugal</groupId>
     <artifactId>parent</artifactId>
-    <version>1.13.1</version>
+    <version>1.14.0</version>
   </parent>
 
   <groupId>ga.rugal.maven</groupId>
@@ -22,9 +22,8 @@
     <!-- dependency -->
     <stanford.version>4.4.0</stanford.version>
     <!-- plugin -->
-    <sisu.plugin.version>0.3.5</sisu.plugin.version>
   </properties>
-  
+
   <issueManagement>
     <system>github issue</system>
     <url>https://github.com/Rugal/commitlinter-maven-plugin/issues</url>
@@ -172,7 +171,6 @@
       <plugin>
         <groupId>org.eclipse.sisu</groupId>
         <artifactId>sisu-maven-plugin</artifactId>
-        <version>${sisu.plugin.version}</version>
         <!-- http://maven.apache.org/maven-jsr330.html -->
         <executions>
           <execution>
