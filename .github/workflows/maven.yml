@@ -1,0 +1,35 @@
+name: CI & CD
+
+on:
+  push:
+    branches: [master]
+    tags: ["v*"]
+  pull_request:
+    branches: [master]
+
+env:
+  SPRING_PROFILES_ACTIVE: ci
+
+jobs:
+  # CI
+  integration:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.6.0
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v3.9.0
+        with:
+          java-version: 17
+          distribution: jdk
+
+      - name: Restore Build Cache
+        uses: actions/cache@v3.2.2
+        with:
+          path: ~/.m2/repository
+          key: v1-commitlinter-${{ hashFiles('pom.xml') }}
+
+      - name: Full Test With Maven
+        run: mvn --no-transfer-progress clean -Dskip.surefire.tests=false -D=skip.failsafe.tests=false verify
