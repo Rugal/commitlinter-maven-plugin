@@ -1,7 +1,8 @@
 package ga.rugal.maven.plugin;
 
 /**
- * Class that contains constant value.
+ * Class that contains constant value.<BR>
+ * Possibily change to kotlin object class.
  *
  * @author Rugal Bernstein
  */
